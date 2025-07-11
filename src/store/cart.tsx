@@ -23,7 +23,10 @@ const useCart = create<CartStore>((set, get) => ({
     count: 0,
     add: (item: CartItem) => {
         const items = get().items
-        set({ items: [...items, item], count: get().count++ })
+        const count = get().count
+        if (count >= 99) return;
+
+        set({ items: [...items, item], count: count + 1 })
     },
     remove: (id: string) => {
         const items = get().items
