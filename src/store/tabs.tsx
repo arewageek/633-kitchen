@@ -15,16 +15,16 @@ interface TabsStore {
 
 const items: TabItem[] = [
     {
+        name: "all",
+        icon: Grid3X3,
+    },
+    {
         name: "meals",
         icon: UtensilsCrossed,
     },
     {
         name: "drinks",
         icon: CupSoda,
-    },
-    {
-        name: "all",
-        icon: Grid3X3,
     },
     {
         name: "snacks",

@@ -13,7 +13,7 @@ const Cart = () => {
         <Sheet>
             <SheetTrigger className='relative border shadow p-3 rounded-lg cursor-pointer hover:shadow-md transiion duration-300'>
                 <ShoppingCart size={25} />
-                <div className='absolute bg-amber-500 w-[18pt] h-[18pt] rounded-full flex items-center justify-center text-[10pt] font-bold -top-2.5 -right-2.5'>
+                <div className='absolute bg-orange-500 text-white w-[18pt] h-[18pt] rounded-full flex items-center justify-center text-[10pt] font-bold -top-2.5 -right-2.5'>
                     {count}
                 </div>
             </SheetTrigger>
