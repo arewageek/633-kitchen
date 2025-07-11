@@ -1,19 +1,21 @@
 "use client"
 
 import useCart from '@/store/cart'
-import React from 'react'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
+import React, { useState } from 'react'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
 import { Button } from './ui/button'
 import { ShoppingCart } from 'lucide-react'
 import CheckoutButton from './checkout-button'
+import { SignedOut, SignedIn, SignInButton } from '@clerk/nextjs'
 
 const Cart = () => {
+    const [open, setOpen] = useState(false)
     const { cartCount, cartItems, reduceItem, addToCart, totalCost } = useCart()
 
     const items = Object.values(cartItems)
 
     return (
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger className='relative border shadow p-3 rounded-lg cursor-pointer hover:shadow-md transiion duration-300'>
                 <ShoppingCart size={25} />
                 <div className='absolute bg-orange-500 text-white w-[18pt] h-[18pt] rounded-full flex items-center justify-center text-[10pt] font-bold -top-2.5 -right-2.5'>
@@ -28,15 +30,15 @@ const Cart = () => {
                     {
                         cartCount > 0 ? (
                             <>
-                                <div className='w-full p-3'>
+                                <div className='w-full p-3 h-[75vh] max-h-[75vh] overflow-y-auto'>
                                     {items.map(item => (
                                         <div key={item.id} className='w-full p-4 px-6 shadow-md bg-gradient from-white/50 to-white/10 rounded-xl my-2 flex items-center justify-between'>
-                                            <div>
+                                            <div className=''>
                                                 <h2 className='text-md font-bold'>
                                                     {item.name}
                                                 </h2>
                                                 <span className='text-gradient font-bold text-xl'>
-                                                    ₦{item.cost.toLocaleString()}
+                                                    ₦{(item.cost * item.quantity).toLocaleString()}
                                                 </span>
                                             </div>
                                             <div className='flex items-center gap-x-2'>
@@ -56,7 +58,7 @@ const Cart = () => {
                                     ))}
                                 </div>
 
-                                <div className='p-2 w-full'>
+                                <div className='p-2 w-full shadow-inner'>
 
                                     <div className='flex items-center justify-between p-4'>
                                         <h4 className='text-lg font-semibold'>Total:</h4>
@@ -64,7 +66,16 @@ const Cart = () => {
                                             ₦{totalCost.toLocaleString()}
                                         </p>
                                     </div>
-                                    <CheckoutButton />
+                                    <SignedOut>
+                                        <SignInButton mode='modal' oauthFlow='popup'>
+                                            <Button onClick={() => setOpen(false)} className='w-full py-4'>
+                                                Signin
+                                            </Button>
+                                        </SignInButton>
+                                    </SignedOut>
+                                    <SignedIn>
+                                        <CheckoutButton click={() => setOpen(false)} />
+                                    </SignedIn>
                                 </div>
                             </>
                         ) : (

@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/header";
-import { BottomTabs } from "@/components/layout/bottom-tabs";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { ToastContainer } from "react-toastify";
+import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -25,15 +20,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100`}
-      >
-        <Header />
-        <div className="mt-4 p-4 md:px-24">
+    <ClerkProvider >
+      <html lang="en">
+        <body suppressHydrationWarning
+          className={`${geistMono.variable} antialiased bg-gray-100`}
+        >
           {children}
-        </div>
-      </body>
-    </html>
+          <ToastContainer />
+          <GoogleOneTap />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

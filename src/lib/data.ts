@@ -8,7 +8,7 @@ export interface MenuItem {
 
 export const menu: MenuItem[] = [
   {
-    name: "Jellof Rice",
+    name: "Jollof Rice",
     image:
       "https://img.freepik.com/free-photo/side-view-pilaf-with-stewed-beef-meat-plate_141793-5057.jpg?semt=ais_hybrid&w=740",
     amount: 1100,
