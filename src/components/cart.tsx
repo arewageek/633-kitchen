@@ -5,6 +5,7 @@ import React from 'react'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
 import { Button } from './ui/button'
 import { ShoppingCart } from 'lucide-react'
+import CheckoutButton from './checkout-button'
 
 const Cart = () => {
     const { cartCount, cartItems, reduceItem, addToCart, totalCost } = useCart()
@@ -63,9 +64,7 @@ const Cart = () => {
                                             ₦{totalCost.toLocaleString()}
                                         </p>
                                     </div>
-                                    <Button className='btn-gradient w-full transition-all'>
-                                        Procced to Payment
-                                    </Button>
+                                    <CheckoutButton />
                                 </div>
                             </>
                         ) : (
