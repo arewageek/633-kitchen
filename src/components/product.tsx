@@ -8,7 +8,7 @@ import useCart from '@/store/cart'
 
 const Product = (props: MenuItem) => {
 
-    const { add } = useCart()
+    const { addToCart } = useCart()
 
     return (
         <Card className='pt-0 text-gray-600 rounded-xl'>
@@ -23,14 +23,14 @@ const Product = (props: MenuItem) => {
                     {props.description || "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate doloremque, consectetur molestiae"}
                 </p>
                 <div className='flex items-center justify-between mt-4'>
-                    <h4 className='font-bold text-xl text-orange-500'>
+                    <h4 className='font-bold text-xl text-gradient'>
                         ₦{props.amount.toLocaleString()}
                     </h4>
 
-                    <button onClick={() => add({
+                    <button onClick={() => addToCart({
                         id: props.name,
                         name: props.name,
-                        quantity: 1
+                        cost: props.amount
                     })} className='flex items-center gap-2 text-xs btn-gradient'>
                         <Plus /> Add
                     </button>
