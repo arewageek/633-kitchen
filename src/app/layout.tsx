@@ -33,7 +33,6 @@ export default function RootLayout({
         <div className="mt-4 p-4 md:px-24">
           {children}
         </div>
-        <BottomTabs />
       </body>
     </html>
   );
