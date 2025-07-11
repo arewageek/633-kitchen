@@ -2,12 +2,12 @@
 
 import useCart from '@/store/cart'
 import React from 'react'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet'
-import { Button } from '../ui/button'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
+import { Button } from './ui/button'
 import { ShoppingCart } from 'lucide-react'
 
 const Cart = () => {
-    const { isOpen, close, count } = useCart()
+    const { count, items } = useCart()
 
     return (
         <Sheet>

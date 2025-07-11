@@ -8,13 +8,10 @@ interface CartItem {
 
 interface CartStore {
     items: CartItem[] | [],
-    isOpen: boolean,
     count: number,
     add: (item: CartItem) => void,
     remove: (id: string) => void,
     clear: () => void,
-    open: () => void,
-    close: () => void
 }
 
 const useCart = create<CartStore>((set, get) => ({
@@ -38,8 +35,6 @@ const useCart = create<CartStore>((set, get) => ({
         })
     },
     clear: () => set({ items: [], count: 0 }),
-    open: () => set({ isOpen: true }),
-    close: () => set({ isOpen: false })
 }))
 
 export default useCart

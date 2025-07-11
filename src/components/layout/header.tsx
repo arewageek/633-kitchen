@@ -3,7 +3,7 @@
 import React from 'react'
 import { Button } from '../ui/button'
 import { ShoppingCart } from 'lucide-react'
-import Cart from './cart'
+import Cart from '../cart'
 import useCart from '@/store/cart'
 
 const Header = () => {
