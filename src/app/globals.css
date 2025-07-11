@@ -123,4 +123,14 @@
 }
 /* 
 ---break--- */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  .footer-link-item {
+    @apply hover:bg-black transition-all duration-500 cursor-pointer;
+  }
 }
