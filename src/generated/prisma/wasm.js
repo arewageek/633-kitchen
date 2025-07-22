@@ -132,6 +132,15 @@ exports.Prisma.ProductScalarFieldEnum = {
   price: 'price',
   image: 'image',
   description: 'description',
+  category_id: 'category_id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -157,7 +166,6 @@ exports.Prisma.OrderItemScalarFieldEnum = {
 
 exports.Prisma.PaymentScalarFieldEnum = {
   id: 'id',
-  amount: 'amount',
   order_id: 'order_id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -177,6 +185,7 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Product: 'Product',
+  Category: 'Category',
   Order: 'Order',
   OrderItem: 'OrderItem',
   Payment: 'Payment'
