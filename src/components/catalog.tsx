@@ -1,19 +1,31 @@
 "use client"
 
-import React from 'react'
+import { useState, useEffect } from 'react'
 import Product from './product'
-import { menu } from '@/lib/data'
 import { useTabStore } from '@/store/tabs'
+import { allProducts, CatalogItem } from '@/actions/catalog'
 
 const Catalog = () => {
     const { active } = useTabStore();
+    const [products, setProducts] = useState<CatalogItem[]>([])
+
+    const getAllProducts = async () => {
+        const response = await allProducts()
+        if (response.status == 'success') {
+            setProducts(response.data || [])
+        }
+    }
+
+    useEffect(() => {
+        getAllProducts()
+    }, [])
 
     return (
         <div className='mt-10 grid grid-cols-1 md:grid-cols-4 gap-5'>
             {
-                menu.filter(item => {
+                products.filter(item => {
                     if (active == "all") return true;
-                    return item.category == active
+                    return item.category?.name.toLowerCase() == active
                 }).map(item => (
                     <Product key={item.name} {...item} />
                 ))
