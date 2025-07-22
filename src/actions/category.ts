@@ -1,43 +1,66 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { Response } from "./catalog";
 
-export async function createCategory(name: string, description?: string) {
+export async function createCategory(
+  name: string,
+  description?: string
+): Promise<Response> {
   try {
-    const response = await prisma.category.create({
+    await prisma.category.create({
       data: {
         name,
         description: description || null,
       },
     });
-    return response;
+    return {
+      status: "success",
+      message: "Created category successfully",
+    };
   } catch (error: any) {
     console.error("Error creating category:", error.message);
-    throw new Error("Failed to create category");
+    return {
+      status: "error",
+      message: "Failed to create category",
+    };
   }
 }
 
-export async function getCategories() {
+export async function getCategories(): Promise<Response> {
   try {
     const response = await prisma.category.findMany();
-    return response;
+
+    return {
+      status: "success",
+      data: response,
+    };
   } catch (error: any) {
     console.error(error.message);
-    throw new Error("Failed to fetch categories");
+    return {
+      status: "error",
+      message: "Failed to get categories",
+    };
   }
 }
 
-export async function deleteCategory(id: string) {
+export async function deleteCategory(id: string): Promise<Response> {
   try {
-    const response = await prisma.category.delete({
+    await prisma.category.delete({
       where: {
         id,
       },
     });
-    return response;
+    return {
+      status: "success",
+      message: "Deleted category successfully",
+    };
   } catch (error: any) {
     console.error("Error deleting category:", error.message);
-    throw new Error("Failed to delete category");
+    return {
+      status: "error",
+      message: "Failed to delete category",
+    };
   }
 }
 
@@ -45,9 +68,9 @@ export async function updateCategory(
   id: string,
   name: string,
   description?: string
-) {
+): Promise<Response> {
   try {
-    const response = await prisma.category.update({
+    await prisma.category.update({
       where: {
         id,
       },
@@ -56,9 +79,16 @@ export async function updateCategory(
         description: description || null,
       },
     });
-    return response;
+
+    return {
+      status: "success",
+      message: "Updated category successfully",
+    };
   } catch (error: any) {
     console.error("Error updating category:", error.message);
-    throw new Error("Failed to update category");
+    return {
+      status: "error",
+      message: "Failed to update category",
+    };
   }
 }
